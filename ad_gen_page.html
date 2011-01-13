@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        
+        
+    </head>
+    <body>
+        <script>
+            var S = location.search
+            , aS = S.split("?")[1]
+            , aPid = aS.split("&")[0].split(",")
+            , bBlock = aS.split("&")[1]
+
+
+            var snonblocktmp = "<script>document.write('<a style=\"display:none!important\" id=\"tanx-a-{pid}\"></a>');";
+            snonblocktmp += "tanx_s = document.createElement(\"script\");";
+            snonblocktmp += "tanx_s.type = \"text/javascript\";";
+            snonblocktmp += "tanx_s.charset = \"gbk\";";
+            snonblocktmp += "tanx_s.id = \"tanx-s-{pid}\";";
+            snonblocktmp += "tanx_s.async = true;";
+            snonblocktmp += "tanx_s.src = \"http://p.tanx.com/ex?i={pid}\";";
+            snonblocktmp += "document.getElementsByTagName(\"head\")[0].appendChild(tanx_s);</sc" + "r" + "ipt>";
+
+            //block
+            var sblocktmp = "<script charset=\"gbk\" src=\"http://p.tanx.com/ex?i={pid}\"></sc" + "r" + "ipt>";
+            var tmp = bBlock == "block" ? sblocktmp : snonblocktmp;
+            document.write("<p>*************   " + (bBlock == "block" ? "普通" : "无阻") + "    ************</p>");
+            for (var i = 0; i < aPid.length; i++) {
+                document.write("<p>===========↓" + aPid[i] + "↓==============================================</p>");
+                document.write(tmp.replace(/\{pid\}/g, aPid[i]));
+                //alert(aPid[i])
+            }
+        </script>
+    </body>
+</html>
